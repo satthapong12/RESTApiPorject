@@ -12,6 +12,10 @@ const ShownotificationRouter = require('./showNotifications');
 const deleteHistoryRouter = require('./deleteHistory');
 const GroupRouter = require('./setThreshold');
 const tokenRoutes = require('./tokenapi');
+const otpRoutes = require('./otpmailer');
+const otptest = require('./jwt');
+
+
 
 
 
@@ -38,6 +42,9 @@ app.use('/showNotifications', ShownotificationRouter);
 app.use('/deleteHistory', deleteHistoryRouter);
 app.use('/setThreshold', GroupRouter);
 app.use('/tokenapi', tokenRoutes);
+app.use('/otpmailer', otpRoutes);
+app.use('/jwt', otptest);
+
 
 
 

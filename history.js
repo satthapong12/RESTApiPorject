@@ -5,7 +5,7 @@ const db = require('./connect'); // Import the database connection
 // Route to fetch data from the 'detec_history' table
 router.get('/fetch_detec_history', async (req, res) => {
     try {
-        const [rows] = await db.query("SELECT * FROM detec_history");
+        const [rows] = await db.query("SELECT * FROM detec_history ORDER BY date_detec DESC");
         res.status(200).json({ DetecPattern: rows });
     } catch (error) {
         console.error('Query failed:', error);
