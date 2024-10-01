@@ -6,11 +6,11 @@ const moment = require('moment-timezone'); // Import moment-timezone
 // Route for fetching notifications that have already been shown
 router.get('/getNotifications', async (req, res) => {
     try {
-        // Fetch notifications that have been shown
+        // Fetch notifications based on status_tracker
         const query = `
             SELECT dh.id, dh.type, dh.count, dh.status, dh.date_detec, dh.file_path
             FROM detec_history dh
-            INNER JOIN last_notification ln ON dh.id = ln.detec_history_id
+            INNER JOIN status_tracker st ON dh.id = st.id
             ORDER BY dh.date_detec DESC;
         `;
         const [rows] = await db.query(query);

@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const loginRouter = require('./login'); // นำเข้า Router สำหรับการล็อกอิน
+const loginjwtRouter = require('./loginjwt'); // นำเข้า Router สำหรับการล็อกอิน
 const registerRouter = require('./register'); // นำเข้า Router สำหรับการล็อกอิน
 const dataRouter = require('./data'); // นำเข้า Router สำหรับการล็อกอิน
 const updateUserRouter = require('./update_user'); // นำเข้า Router สำหรับการ
@@ -14,6 +15,7 @@ const GroupRouter = require('./setThreshold');
 const tokenRoutes = require('./tokenapi');
 const otpRoutes = require('./otpmailer');
 const otptest = require('./jwt');
+const checkDataRoutes = require('./checkData');
 
 
 
@@ -32,6 +34,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // ใช้ Router สำหรับการล็อกอิน
 app.use('/login', loginRouter);
+app.use('/loginjwt', loginjwtRouter);
+
 app.use('/register', registerRouter);
 app.use('/data', dataRouter);
 app.use('/update_user', updateUserRouter);
@@ -44,6 +48,9 @@ app.use('/setThreshold', GroupRouter);
 app.use('/tokenapi', tokenRoutes);
 app.use('/otpmailer', otpRoutes);
 app.use('/jwt', otptest);
+app.use('/checkData', checkDataRoutes);
+
+
 
 
 
