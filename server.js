@@ -1,22 +1,27 @@
 // server.js
 const express = require('express');
 const cors = require('cors');
-const loginRouter = require('./login'); // นำเข้า Router สำหรับการล็อกอิน
-const loginjwtRouter = require('./loginjwt'); // นำเข้า Router สำหรับการล็อกอิน
-const registerRouter = require('./register'); // นำเข้า Router สำหรับการล็อกอิน
-const dataRouter = require('./data'); // นำเข้า Router สำหรับการล็อกอิน
-const updateUserRouter = require('./update_user'); // นำเข้า Router สำหรับการ
-const DetectHistoryRouter = require('./history'); // นำเข้า Router สำหรับการ
-const fileRouter = require('./readfile');
-const notificationRouter = require('./pushNotification');
-const ShownotificationRouter = require('./showNotifications');
-const deleteHistoryRouter = require('./deleteHistory');
-const GroupRouter = require('./setThreshold');
-const tokenRoutes = require('./tokenapi');
-const otpRoutes = require('./otpmailer');
-const otptest = require('./jwt');
-const checkDataRoutes = require('./checkData');
+const dotenv = require('dotenv');
+dotenv.config();
 
+
+
+const loginRouter = require('./routes/login'); // นำเข้า Router สำหรับการล็อกอิน
+//const loginjwtRouter = require('./loginjwt'); // นำเข้า Router สำหรับการล็อกอิน
+const registerRouter = require('./routes/register'); // นำเข้า Router สำหรับการล็อกอิน
+const dataRouter = require('./routes/data'); // นำเข้า Router สำหรับการล็อกอิน
+const updateUserRouter = require('./routes/update_user'); // นำเข้า Router สำหรับการ
+const DetectHistoryRouter = require('./routes/history'); // นำเข้า Router สำหรับการ
+const fileRouter = require('./routes/readfile');
+const notificationRouter = require('./routes/pushNotification');
+const ShownotificationRouter = require('./routes/showNotifications');
+const deleteHistoryRouter = require('./routes/deleteHistory');
+const GroupRouter = require('./routes/setThreshold');
+const tokenRoutes = require('./routes/tokenapi');
+const otpRoutes = require('./routes/otpmailer');
+const otptest = require('./routes/jwt');
+const checkDataRoutes = require('./routes/detectRoute');
+const protectedRoutes = require('./routes/protected');
 
 
 
@@ -33,24 +38,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ใช้ Router สำหรับการล็อกอิน
-app.use('/login', loginRouter);
-app.use('/loginjwt', loginjwtRouter);
+app.use('/routes/login', loginRouter);
+//app.use('/loginjwt', loginjwtRouter);
 
-app.use('/register', registerRouter);
-app.use('/data', dataRouter);
-app.use('/update_user', updateUserRouter);
-app.use('/history', DetectHistoryRouter);
-app.use('/readfile', fileRouter);
-app.use('/pushNotification', notificationRouter);
-app.use('/showNotifications', ShownotificationRouter);
-app.use('/deleteHistory', deleteHistoryRouter);
-app.use('/setThreshold', GroupRouter);
-app.use('/tokenapi', tokenRoutes);
-app.use('/otpmailer', otpRoutes);
-app.use('/jwt', otptest);
-app.use('/checkData', checkDataRoutes);
-
-
+app.use('/routes/register', registerRouter);
+app.use('/routes/data', dataRouter);
+app.use('/routes/update_user', updateUserRouter);
+app.use('/routes/history', DetectHistoryRouter);
+app.use('/routes/readfile', fileRouter);
+app.use('/routes/pushNotification', notificationRouter);
+app.use('/routes/showNotifications', ShownotificationRouter);
+app.use('/routes/deleteHistory', deleteHistoryRouter);
+app.use('/routes/setThreshold', GroupRouter);
+app.use('/routes/tokenapi', tokenRoutes);
+app.use('/routes/otpmailer', otpRoutes);
+app.use('/routes/jwt', otptest);
+app.use('/routes/detectRoute', checkDataRoutes);
+app.use('/routes/protected', protectedRoutes); // ตั้งชื่อเส้นทางให้ชัดเจน
 
 
 
@@ -63,5 +67,5 @@ app.use('/checkData', checkDataRoutes);
 
 
 app.listen(port, () => {
-    console.log('Server running on port ${port}');
+    console.log(`Server running on port ${port}`);
 });

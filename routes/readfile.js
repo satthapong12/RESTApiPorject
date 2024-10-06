@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { readFileContent } = require('./fileUtils'); // ใช้ฟังก์ชันจาก fileUtils.js
-const db = require('./connect'); // เชื่อมต่อฐานข้อมูล
+const db = require('../connect');
 
 // เส้นทางสำหรับดึงเนื้อหาของไฟล์
 router.get('/file-content/:id', async (req, res) => {

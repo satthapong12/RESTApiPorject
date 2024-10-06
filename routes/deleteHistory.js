@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./connect'); // เชื่อมต่อฐานข้อมูล
+const db = require('../connect');
 
   
   // สร้าง API สำหรับลบข้อมูลในตาราง detec_history

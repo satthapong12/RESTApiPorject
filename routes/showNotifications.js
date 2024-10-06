@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./connect'); // Import the database connection
+const db = require('../connect');
 const moment = require('moment-timezone'); // Import moment-timezone
 
 // Route for fetching notifications that have already been shown

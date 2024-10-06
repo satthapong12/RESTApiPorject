@@ -1,5 +1,8 @@
 const mysql = require('mysql2/promise');
 const os = require('os');
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 // ฟังก์ชันดึง IP address
 function getLocalIp() {
@@ -17,13 +20,20 @@ function getLocalIp() {
 }
 
 const host = getLocalIp(); // ดึง IP address ของเครื่อง
-
+console.log('Connecting to MySQL with:');
+console.log('Host:', host);
+console.log('User:', process.env.DB_USER);
+console.log('Password:', process.env.DB_PASSWORD);
+console.log('Database:', process.env.DB_NAME);
 // ตั้งค่าการเชื่อมต่อฐานข้อมูล
 const db = mysql.createPool({
     host: host, // ใช้ IP address ที่ดึงมาได้
-    user: 'root',
-    password: 'Cs210245',
-    database: 'pro1_register'
+    user: process.env.DB_USER,         // e.g., 'root'
+    password: process.env.DB_PASSWORD, // e.g., 'password123'
+    database: process.env.DB_NAME,     // e.g., 'my_database'
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 db.getConnection()

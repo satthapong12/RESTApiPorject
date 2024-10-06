@@ -1,10 +1,11 @@
 const express = require('express');
-const db = require('./connect'); // เชื่อมต่อฐานข้อมูล
+const db = require('../connect');
+const authenticateToken = require('../middleware/authMiddleware'); // นำเข้า middleware
 
 const router = express.Router();
 
 // Route สำหรับดึงข้อมูลทั้งหมดจากตาราง users
-router.get('/users', async (req, res) => {
+router.get('/users',authenticateToken,async (req, res) => {
     try {
         const [rows] = await db.query('SELECT * FROM users');
         if(rows.length >0 ){

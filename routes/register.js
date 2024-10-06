@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const db = require('./connect'); // เชื่อมต่อฐานข้อมูล
+const db = require('../connect');
 
 const router = express.Router();
 

@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./connect'); // Import the database connection
+const db = require('../connect');
+const authenticateToken = require('../middleware/authMiddleware'); // นำเข้า middleware
 
 // Route to fetch data from the 'detec_history' table
-router.get('/fetch_group', async (req, res) => {
+router.get('/fetch_group',authenticateToken, async (req, res) => {
     try {
         const [rows] = await db.query("SELECT id,name,Threshold FROM AttackGroup");
         res.status(200).json({ AttackGroup: rows });

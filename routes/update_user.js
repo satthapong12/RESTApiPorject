@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./connect'); // เชื่อมต่อฐานข้อมูล
+const db = require('../connect');
+const authenticateToken = require('../middleware/authMiddleware'); 
 
-router.post('/', async (req, res) => {
+router.post('/',authenticateToken, async (req, res) => {
   const { email, field, value } = req.body;
 
   // ตรวจสอบการป้อนข้อมูล

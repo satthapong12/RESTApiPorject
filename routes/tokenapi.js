@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./connect'); // เชื่อมต่อฐานข้อมูล
+const db = require('../connect');
+const authenticateToken = require('../middleware/authMiddleware'); // นำเข้า middleware ตรวจสอบ token
 
 // ดึงข้อมูล Token ที่ไม่เป็น null
-router.get('/fetch_tokens', async (req, res) => {
+router.get('/fetch_tokens',authenticateToken, async (req, res) => {
     try {
         const [rows] = await db.query('SELECT email,token FROM users WHERE token IS NOT NULL AND token != ""');
        const tokenWithEamil = rows.map(row => ({
